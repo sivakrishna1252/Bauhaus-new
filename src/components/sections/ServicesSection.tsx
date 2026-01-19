@@ -2,27 +2,28 @@ import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
-import kitchenImage from '@/assets/kitchen-service.jpg';
-import bathroomImage from '@/assets/bathroom-service.jpg';
 import bedroomImage from '@/assets/Renovation.jpg';
+import aboutImage from '@/assets/bedroom-service.jpg';
+import renovationImage from '@/assets/renovation.webp';
+import consultImage from '@/assets/consultation.webp'
 
 const services = [
   {
     title: 'Turnkey Solutions',
-    description: 'Custom-designed kitchens with premium materials and smart storage solutions.',
-    image: kitchenImage,
+    description: 'Custom-designed interiors with premium materials and smart solutions.',
+    image: aboutImage,
     href: '/modular-kitchens',
   },
   {
     title: 'Design Consultation',
     description: 'Transform your bathroom into a luxurious spa-like retreat with our consultation services for your dream space.',
-    image: bathroomImage,
+    image: consultImage,
     href: '/bathrooms',
   },
   {
     title: 'Renovation',
     description: 'End-to-end turnkey solutions for your entire home transformation and renovation for your dream space.',
-    image: bedroomImage,
+    image: renovationImage,
     href: '/portfolio',
   },
 ];

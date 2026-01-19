@@ -4,16 +4,21 @@ import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import sumit from '@/assets/sumit/BAUHAUS PHOTOS 05.webp';
 import rajesh from '@/assets/rajesh.jpg';
-import fahem from '@/assets/fahem.jpg';
-import arpit from '@/assets/arpit.jpg';
-
+import { useState } from 'react';
 import { projects } from '@/data/projects';
 
 const ResidentialProjects = () => {
     const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
     const residentialProjects = projects.filter(p => p.type === 'residential');
+
+    const [pageLength, setPageLength] = useState(4)
+
+    const handlePageLength = () => {
+        if (pageLength < residentialProjects.length) {
+            setPageLength(prev => prev + 4)
+        }
+    }
 
     return (
         <Layout>
@@ -71,7 +76,7 @@ const ResidentialProjects = () => {
             <section className="section-padding bg-background" ref={ref}>
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
-                        {residentialProjects.map((project, index) => (
+                        {residentialProjects.slice(0, pageLength).map((project, index) => (
                             <Link
                                 key={project.id}
                                 to={`/project/${project.id}`}
@@ -96,7 +101,15 @@ const ResidentialProjects = () => {
                                         <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-semibold">{project.location}</p>
                                         <h3 className="font-serif text-3xl lg:text-4xl text-foreground mb-4 group-hover:text-gold transition-colors duration-300 leading-tight">{project.title}</h3>
                                         <div className="w-16 h-px bg-gold/40 mb-6" />
-                                        <p className="text-gold font-semibold mb-3 text-[11px] tracking-[0.2em] uppercase">Designed for {project.client}</p>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <p className="text-gold font-semibold text-[11px] tracking-[0.2em] uppercase">Designed for {project.client}</p>
+                                            {project.configuration && (
+                                                <p className="text-neutral-400 text-[11px] tracking-[0.2em] uppercase">/ {project.configuration}</p>
+                                            )}
+                                            {project.handoverYear && (
+                                                <p className="text-neutral-400 text-[11px] tracking-[0.2em] uppercase">/ {project.handoverYear}</p>
+                                            )}
+                                        </div>
                                         <p className="text-neutral-600 leading-relaxed text-base lg:text-lg text-justify line-clamp-3">{project.description}</p>
                                         <div className="mt-6 inline-flex items-center text-gold font-medium group/btn">
                                             View Project Details
@@ -107,6 +120,18 @@ const ResidentialProjects = () => {
                             </Link>
                         ))}
                     </div>
+
+                    {pageLength < residentialProjects.length && (
+                        <div className="mt-16 text-center">
+                            <Button
+                                variant="outline"
+                                className="border-gold text-gold hover:bg-gold hover:text-white transition-colors duration-300 uppercase tracking-[0.2em] text-[11px] font-bold px-10 py-6"
+                                onClick={handlePageLength}
+                            >
+                                Load More Projects
+                            </Button>
+                        </div>
+                    )}
 
                     {/* CTA */}
                     <div className={cn(

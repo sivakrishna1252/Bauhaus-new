@@ -104,6 +104,28 @@ const ProjectDetail = () => {
                                     <p className="font-serif text-lg text-background capitalize">{project.type}</p>
                                 </div>
                             </div>
+                            {project.configuration && (
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mr-4">
+                                        <Maximize2 className="w-5 h-5 text-gold" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-1">Configuration</p>
+                                        <p className="font-serif text-lg text-background">{project.configuration}</p>
+                                    </div>
+                                </div>
+                            )}
+                            {project.handoverYear && (
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mr-4">
+                                        <Tag className="w-5 h-5 text-gold" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-1">Year</p>
+                                        <p className="font-serif text-lg text-background">{project.handoverYear}</p>
+                                    </div>
+                                </div>
+                            )}
                         </motion.div>
                     </motion.div>
                 </div>

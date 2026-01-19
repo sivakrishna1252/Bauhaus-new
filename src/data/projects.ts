@@ -3,8 +3,33 @@ import rajeshMain from '@/assets/rajesh.jpg';
 import fahemMain from '@/assets/fahem.jpg';
 import arpitMain from '@/assets/arpit.jpg';
 import taikenMain from '@/assets/Taiken 08.jpg';
+import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
+
+// Somesh & Priyanka Photos
+import someshPriyankaMain from '@/assets/somesh&priyanka.jpg.jpg';
+import someshPriyanka2 from '@/assets/somesh&priyankas2.jpg.jpg';
+
+// Pranav Photos
+import pranavMain from '@/assets/pranav1.jpg.jpg';
+import pranav2 from '@/assets/pranav2.jpg.jpg';
+
+// Rajkiran Photos
+import rajkiranMain from '@/assets/Rajkiran2.jpg (1).jpg';
+import rajkiran2 from '@/assets/rajkiran2 (1).jpg';
+
+// Mohit Gupta Photos
+import mohitGuptaMain from '@/assets/mohitGupta1.jpg (1).jpg';
+import mohitGupta2 from '@/assets/mohitGupta.jpg (1).jpg';
+
+// Rahul & Nisha Photos
+import rahulNishaMain from '@/assets/Rahul&nisha.jpg (1).jpg';
+import rahulNisha2 from '@/assets/Rahul&Nisha2.jpg (1).jpg';
+
+// Kuldeep Photos
+import kuldeepMain from '@/assets/kuldeep (1).jpg.jpg';
+import kuldeep1 from '@/assets/kuldeep1 (1).jpg';
 
 // Sumit Photos
 import sumit1 from '@/assets/sumit/BAUHAUS PHOTOS 05.webp';
@@ -65,6 +90,8 @@ export interface Project {
     description: string;
     type: 'residential' | 'commercial';
     gallery: string[];
+    configuration?: string;
+    handoverYear?: string;
 }
 
 export const projects: Project[] = [
@@ -77,6 +104,8 @@ export const projects: Project[] = [
         description: 'An elegant residential interior designed for Sumit Oswal, featuring premium materials and a sophisticated design language that reflects modern luxury and personalized comfort.',
         type: 'residential',
         gallery: [sumit1, sumit2, sumit3, sumit4, sumit5, sumit6, sumit7, sumit8, sumit9],
+        configuration: '3bhk',
+        handoverYear: '2025'
     },
     {
         id: 'modern-luxury-apartment',
@@ -87,6 +116,8 @@ export const projects: Project[] = [
         description: 'A modern residential project designed for Rajesh Mohapatra, focusing on functionality and aesthetic appeal with high-quality finishes and bespoke furniture tailored for urban living.',
         type: 'residential',
         gallery: [rajesh1, rajesh2, rajesh3, rajesh4, rajesh5, rajesh6, rajesh7, rajesh8],
+        configuration: '3bhk',
+        handoverYear: '2025'
     },
     {
         id: 'contemporary-luxury-villa',
@@ -97,16 +128,20 @@ export const projects: Project[] = [
         description: 'A contemporary residential villa interior designed for Faheem Shaikh, seamlessly blending modern aesthetics with traditional comfort through elegant layouts and premium finishes.',
         type: 'residential',
         gallery: [faheem1, faheem2, faheem3, faheem4, faheem5, faheem8, faheem9, faheem10, faheem11, faheem12, faheem13, faheem14, faheem15, faheem17, faheem18, faheem19, faheem20],
+        configuration: '2bhk',
+        handoverYear: '2023'
     },
     {
         id: 'minimalist-studio-apartment',
         title: 'Minimalist Studio Apartment',
-        client: 'Arpit',
+        client: 'Arpit Jalan',
         location: 'Aundh, Pune',
         image: arpitMain,
         description: 'A compact studio apartment designed with a focus on smart usage of space. The interior features multi-functional furniture and a light color palette, creating a spacious feel.',
         type: 'residential',
         gallery: [arpitMain, project2, project3],
+        configuration: '3Bhk',
+        handoverYear: '2025'
     },
     {
         id: 'taiken-pan-asian',
@@ -117,6 +152,8 @@ export const projects: Project[] = [
         description: 'A bold and atmospheric interior design for a Pan Asian restaurant in Kharadi, Pune. The space blends traditional Asian aesthetics with modern industrial elements, creating an immersive dining experience.',
         type: 'commercial',
         gallery: [taiken2, taiken3, taiken4, taiken5, taiken7, taiken9, taiken10, taiken11],
+        configuration: 'Pan Asian Restaurant',
+        handoverYear: '2025'
     },
     {
         id: 'corporate-workspace',
@@ -127,5 +164,91 @@ export const projects: Project[] = [
         description: 'A modern commercial interior designed as an open-plan office that fosters collaboration and productivity. The workspace combines functional layouts, contemporary design elements, and premium finishes.',
         type: 'commercial',
         gallery: [project2, project3],
+        configuration: 'Modular Office',
+        handoverYear: '2023'
     },
+    {
+        id: 'somesh-priyanka-residential',
+        title: 'Somesh and Priyanka Residence',
+        client: 'Somesh and priyanka',
+        location: 'Bavdhan, Pune',
+        image: someshPriyankaMain,
+        description: 'Equipped with modern amenities and a sophisticated design, this 3BHK residence in Bavdhan reflects the lifestyle of its owners.',
+        type: 'residential',
+        gallery: [someshPriyankaMain, someshPriyanka2],
+        configuration: '3bhk',
+        handoverYear: '2025'
+    },
+    {
+        id: 'pranav-akriti-residential',
+        title: 'Pranav & Akriti Home',
+        client: 'Pranav & Akriti',
+        location: 'Pune',
+        image: pranavMain,
+        description: 'A contemporary residential project in Pune, tailored to the specific needs of Pranav and Akriti.',
+        type: 'residential',
+        gallery: [pranavMain, pranav2],
+        configuration: '3bhk',
+        handoverYear: '2023'
+    },
+    {
+        id: 'rajkiran-bande-residential',
+        title: 'Rajkiran Bande Residence',
+        client: 'Rajkiran Bande',
+        location: 'Pune',
+        image: rajkiranMain,
+        description: 'A sleek and modern 2BHK apartment in Pune, designed for Rajkiran Bande.',
+        type: 'residential',
+        gallery: [rajkiranMain, rajkiran2],
+        configuration: '2bhk',
+        handoverYear: '2024'
+    },
+    {
+        id: 'mohit-gupta-residential',
+        title: 'Mohit Gupta Apartment',
+        client: 'Mohit Gupta',
+        location: 'Pune',
+        image: mohitGuptaMain,
+        description: 'A stylish and functional 2BHK residential interior in Pune for Mohit Gupta.',
+        type: 'residential',
+        gallery: [mohitGuptaMain, mohitGupta2],
+        configuration: '2bhk',
+        handoverYear: '2025'
+    },
+    {
+        id: 'rahul-nisha-residential',
+        title: 'Rahul & Nisha Residence',
+        client: 'Rahul & Nisha',
+        location: 'Pune',
+        image: rahulNishaMain,
+        description: 'A beautiful 3BHK home in Pune, reflecting the elegant taste of Rahul and Nisha.',
+        type: 'residential',
+        gallery: [rahulNishaMain, rahulNisha2],
+        configuration: '3bhk',
+        handoverYear: '2023'
+    },
+    {
+        id: 'kuldeep-residential',
+        title: 'Kuldeep Residence',
+        client: 'Kuldeep',
+        location: 'Pune',
+        image: kuldeepMain,
+        description: 'A minimalist 2BHK apartment in Pune, designed for Kuldeep.',
+        type: 'residential',
+        gallery: [kuldeepMain, kuldeep1],
+        configuration: '2bhk',
+        handoverYear: '2024'
+    },
+    {
+        id: 'prashant-guleria-residential',
+        title: 'Prashant Guleria Home',
+        client: 'Prashant Guleria',
+        location: 'Pune',
+        image: project1,
+        description: 'A sophisticated 3BHK residential interior in Pune for Prashant Guleria.',
+        type: 'residential',
+        gallery: [project1, project2],
+        configuration: '3bhk',
+        handoverYear: '2025'
+    }
 ];

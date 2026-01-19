@@ -70,7 +70,7 @@ const CommercialProjects = () => {
             {/* Projects Grid */}
             <section className="section-padding bg-background" ref={ref}>
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2  gap-10 lg:gap-12">
                         {commercialProjects.map((project, index) => (
                             <Link
                                 key={project.id}
@@ -96,7 +96,15 @@ const CommercialProjects = () => {
                                         <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-semibold">{project.location}</p>
                                         <h3 className="font-serif text-3xl lg:text-4xl text-foreground mb-4 group-hover:text-gold transition-colors duration-300 leading-tight">{project.title}</h3>
                                         <div className="w-16 h-px bg-gold/40 mb-6" />
-                                        <p className="text-gold font-semibold mb-3 text-[11px] tracking-[0.2em] uppercase">Designed for {project.client}</p>
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            <p className="text-gold font-semibold text-[11px] tracking-[0.2em] uppercase">Designed for {project.client}</p>
+                                            {project.configuration && (
+                                                <p className="text-neutral-400 text-[11px] tracking-[0.2em] uppercase">/ {project.configuration}</p>
+                                            )}
+                                            {project.handoverYear && (
+                                                <p className="text-neutral-400 text-[11px] tracking-[0.2em] uppercase">/ {project.handoverYear}</p>
+                                            )}
+                                        </div>
                                         <p className="text-neutral-600 leading-relaxed text-base lg:text-lg text-justify line-clamp-3">{project.description}</p>
                                         <div className="mt-6 inline-flex items-center text-gold font-medium group/btn">
                                             View Project Details
