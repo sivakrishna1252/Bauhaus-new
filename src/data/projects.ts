@@ -95,78 +95,7 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-    {
-        id: 'elegant-home-interior',
-        title: 'Elegant Home Interior',
-        client: 'Sumit Oswal',
-        location: 'Pune',
-        image: sumitMain,
-        description: 'An elegant residential interior designed for Sumit Oswal, featuring premium materials and a sophisticated design language that reflects modern luxury and personalized comfort.',
-        type: 'residential',
-        gallery: [sumit1, sumit2, sumit3, sumit4, sumit5, sumit6, sumit7, sumit8, sumit9],
-        configuration: '3bhk',
-        handoverYear: '2025'
-    },
-    {
-        id: 'modern-luxury-apartment',
-        title: 'Modern Luxury Apartment',
-        client: 'Rajesh Mohapatra',
-        location: 'Pune',
-        image: rajeshMain,
-        description: 'A modern residential project designed for Rajesh Mohapatra, focusing on functionality and aesthetic appeal with high-quality finishes and bespoke furniture tailored for urban living.',
-        type: 'residential',
-        gallery: [rajesh1, rajesh2, rajesh3, rajesh4, rajesh5, rajesh6, rajesh7, rajesh8],
-        configuration: '3bhk',
-        handoverYear: '2025'
-    },
-    {
-        id: 'contemporary-luxury-villa',
-        title: 'Contemporary Luxury Villa',
-        client: 'Faheem Shaikh',
-        location: 'Kalyani Nagar, Pune',
-        image: fahemMain,
-        description: 'A contemporary residential villa interior designed for Faheem Shaikh, seamlessly blending modern aesthetics with traditional comfort through elegant layouts and premium finishes.',
-        type: 'residential',
-        gallery: [faheem1, faheem2, faheem3, faheem4, faheem5, faheem8, faheem9, faheem10, faheem11, faheem12, faheem13, faheem14, faheem15, faheem17, faheem18, faheem19, faheem20],
-        configuration: '2bhk',
-        handoverYear: '2023'
-    },
-    {
-        id: 'minimalist-studio-apartment',
-        title: 'Minimalist Studio Apartment',
-        client: 'Arpit Jalan',
-        location: 'Aundh, Pune',
-        image: arpitMain,
-        description: 'A compact studio apartment designed with a focus on smart usage of space. The interior features multi-functional furniture and a light color palette, creating a spacious feel.',
-        type: 'residential',
-        gallery: [arpitMain, project2, project3],
-        configuration: '3Bhk',
-        handoverYear: '2025'
-    },
-    {
-        id: 'taiken-pan-asian',
-        title: 'Taiken The Pan Asian',
-        client: 'Taiken',
-        location: 'Kharadi, Pune',
-        image: taikenMain,
-        description: 'A bold and atmospheric interior design for a Pan Asian restaurant in Kharadi, Pune. The space blends traditional Asian aesthetics with modern industrial elements, creating an immersive dining experience.',
-        type: 'commercial',
-        gallery: [taiken2, taiken3, taiken4, taiken5, taiken7, taiken9, taiken10, taiken11],
-        configuration: 'Pan Asian Restaurant',
-        handoverYear: '2025'
-    },
-    {
-        id: 'corporate-workspace',
-        title: 'Corporate Workspace',
-        client: 'Modular Office Solutions',
-        location: 'Hinjewadi, Pune',
-        image: project2,
-        description: 'A modern commercial interior designed as an open-plan office that fosters collaboration and productivity. The workspace combines functional layouts, contemporary design elements, and premium finishes.',
-        type: 'commercial',
-        gallery: [project2, project3],
-        configuration: 'Modular Office',
-        handoverYear: '2023'
-    },
+    // Project 1
     {
         id: 'somesh-priyanka-residential',
         title: 'Somesh and Priyanka Residence',
@@ -179,6 +108,7 @@ export const projects: Project[] = [
         configuration: '3bhk',
         handoverYear: '2025'
     },
+    // Project 2
     {
         id: 'pranav-akriti-residential',
         title: 'Pranav & Akriti Home',
@@ -191,6 +121,20 @@ export const projects: Project[] = [
         configuration: '3bhk',
         handoverYear: '2023'
     },
+    // Project 3
+    {
+        id: 'Rajesh Mohapatra',
+        title: 'Rajesh Mohapatra ',
+        client: 'Rajesh Mohapatra',
+        location: 'Pune',
+        image: rajeshMain,
+        description: 'A modern residential project designed for Rajesh Mohapatra, focusing on functionality and aesthetic appeal with high-quality finishes and bespoke furniture tailored for urban living.',
+        type: 'residential',
+        gallery: [rajesh1, rajesh2, rajesh3, rajesh4, rajesh5, rajesh6, rajesh7, rajesh8],
+        configuration: '3bhk',
+        handoverYear: '2025'
+    },
+    // Project 4
     {
         id: 'rajkiran-bande-residential',
         title: 'Rajkiran Bande Residence',
@@ -203,6 +147,7 @@ export const projects: Project[] = [
         configuration: '2bhk',
         handoverYear: '2024'
     },
+    // Project 5
     {
         id: 'mohit-gupta-residential',
         title: 'Mohit Gupta Apartment',
@@ -215,6 +160,20 @@ export const projects: Project[] = [
         configuration: '2bhk',
         handoverYear: '2025'
     },
+    // Project 6
+    {
+        id: 'Faheem Shaikh',
+        title: 'Faheem Shaikh',
+        client: 'Faheem',
+        location: 'Pune',
+        image: fahemMain,
+        description: 'A contemporary residential villa interior designed for Faheem Shaikh, seamlessly blending modern aesthetics with traditional comfort through elegant layouts and premium finishes.',
+        type: 'residential',
+        gallery: [faheem1, faheem2, faheem3, faheem4, faheem5, faheem8, faheem9, faheem10, faheem11, faheem12, faheem13, faheem14, faheem15, faheem17, faheem18, faheem19, faheem20],
+        configuration: '2bhk',
+        handoverYear: '2023'
+    },
+    // Project 7
     {
         id: 'rahul-nisha-residential',
         title: 'Rahul & Nisha Residence',
@@ -227,6 +186,33 @@ export const projects: Project[] = [
         configuration: '3bhk',
         handoverYear: '2023'
     },
+    // Project 8
+    {
+        id: 'Arpit Jalan',
+        title: 'Arpit Jalan',
+        client: 'Arpit Jalan',
+        location: 'Pune',
+        image: arpitMain,
+        description: 'A compact studio apartment designed with a focus on smart usage of space. The interior features multi-functional furniture and a light color palette, creating a spacious feel.',
+        type: 'residential',
+        gallery: [arpitMain, project2, project3],
+        configuration: '3Bhk',
+        handoverYear: '2025'
+    },
+    // Project 9
+    {
+        id: 'Sumit Oswal',
+        title: 'Sumit Oswal',
+        client: 'Sumit Oswal',
+        location: 'Pune',
+        image: sumitMain,
+        description: 'An elegant residential interior designed for Sumit Oswal, featuring premium materials and a sophisticated design language that reflects modern luxury and personalized comfort.',
+        type: 'residential',
+        gallery: [sumit1, sumit2, sumit3, sumit4, sumit5, sumit6, sumit7, sumit8, sumit9],
+        configuration: '3bhk',
+        handoverYear: '2025'
+    },
+    // Project 10
     {
         id: 'kuldeep-residential',
         title: 'Kuldeep Residence',
@@ -239,6 +225,20 @@ export const projects: Project[] = [
         configuration: '2bhk',
         handoverYear: '2024'
     },
+    // Project 11
+    {
+        id: 'taiken-pan-asian',
+        title: 'Taiken The Pan Asian',
+        client: 'Taiken',
+        location: 'Pune',
+        image: taikenMain,
+        description: 'A bold and atmospheric interior design for a Pan Asian restaurant in Kharadi, Pune. The space blends traditional Asian aesthetics with modern industrial elements, creating an immersive dining experience.',
+        type: 'commercial',
+        gallery: [taiken2, taiken3, taiken4, taiken5, taiken7, taiken9, taiken10, taiken11],
+        configuration: 'Pan Asian Restaurant',
+        handoverYear: '2025'
+    },
+    // Project 12
     {
         id: 'prashant-guleria-residential',
         title: 'Prashant Guleria Home',
@@ -250,5 +250,18 @@ export const projects: Project[] = [
         gallery: [project1, project2],
         configuration: '3bhk',
         handoverYear: '2025'
+    },
+    // Additional project (not in the main sequence)
+    {
+        id: 'corporate-workspace',
+        title: 'Corporate Workspace',
+        client: 'Modular Office Solutions',
+        location: 'Hinjewadi, Pune',
+        image: project2,
+        description: 'A modern commercial interior designed as an open-plan office that fosters collaboration and productivity. The workspace combines functional layouts, contemporary design elements, and premium finishes.',
+        type: 'commercial',
+        gallery: [project2, project3],
+        configuration: 'Modular Office',
+        handoverYear: '2023'
     }
 ];
