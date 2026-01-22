@@ -160,9 +160,9 @@ import mohit17 from '@/assets/mohitgupta/Mohit Gupta/PRA04464_5_6_7_8.webp';
 
 // Rahul & Nisha Photos
 import rahul1 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02308_09_10_11_12.webp';
-import rahul2 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02313_4_5_6_7.webp';
+import rahul2 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02318_19_20_21_22.webp';
 import rahul3 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02318_19_20_21_22.webp';
-import rahul4 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02323_4_5_6_7.webp';
+import rahul4 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02331_2_3.webp';
 import rahul5 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02328_29_30.webp';
 import rahul6 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02331_2_3.webp';
 import rahul7 from '@/assets/Rahul & NIsha/Rahul & Nisha/PRA02344_5_6_7_8.webp';
