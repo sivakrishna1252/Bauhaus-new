@@ -1,35 +1,137 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function ContactPopup() {
     const [isOpen, setIsOpen] = useState(false);
-    const [hasOpened, setHasOpened] = useState(false); // Only open once automatically
+    const [hasOpened, setHasOpened] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        propertyType: '',
+        budget: '',
+        message: '',
+    });
     const { toast } = useToast();
+    const location = useLocation();
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const popupCountRef = useRef(0);
+    const isPortfolioPage = location.pathname === '/portfolio';
 
     useEffect(() => {
-        // Trigger popup 5 seconds after page load
-        const timer = setTimeout(() => {
-            if (!hasOpened) {
-                setIsOpen(true);
-                setHasOpened(true);
-            }
-        }, 5000);
+        // Reset popup count when navigating to Portfolio page
+        if (isPortfolioPage) {
+            popupCountRef.current = 0;
+        }
 
-        return () => clearTimeout(timer);
-    }, [hasOpened]);
+        if (isPortfolioPage) {
+            // Portfolio page: Show popup every 30 seconds, maximum 3 times
+            const showPopup = () => {
+                if (popupCountRef.current < 3) {
+                    setIsOpen(true);
+                    popupCountRef.current += 1;
+                    
+                    // Stop interval after 3 popups
+                    if (popupCountRef.current >= 3 && intervalRef.current) {
+                        clearInterval(intervalRef.current);
+                        intervalRef.current = null;
+                    }
+                }
+            };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        toast({
-            title: "Request Received",
-            description: "We'll call you back shortly!",
+            // First popup after 30 seconds
+            const firstTimer = setTimeout(() => {
+                showPopup();
+            }, 30000);
+
+            // Subsequent popups every 30 seconds
+            intervalRef.current = setInterval(() => {
+                showPopup();
+            }, 30000);
+
+            return () => {
+                clearTimeout(firstTimer);
+                if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                }
+            };
+        } else {
+            // Other pages (like home): Show popup once after 5 seconds
+            const timer = setTimeout(() => {
+                if (!hasOpened) {
+                    setIsOpen(true);
+                    setHasOpened(true);
+                }
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [isPortfolioPage, hasOpened]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
         });
-        setIsOpen(false);
+    };
+
+    const handleSelectChange = (name: string, value: string) => {
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:8000/api/contacts/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email,
+                    configuration: formData.propertyType,
+                    budget: formData.budget,
+                    message: formData.message,
+                }),
+            });
+
+            if (response.ok) {
+                toast({
+                    title: "Request Received",
+                    description: "We'll call you back shortly!",
+                });
+                setIsOpen(false);
+                setFormData({ name: '', phone: '', email: '', propertyType: '', budget: '', message: '' });
+            } else {
+                toast({
+                    title: "Submission Error",
+                    description: "Failed to send message. Please try again.",
+                    variant: "destructive"
+                });
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            toast({
+                title: "Connection Error",
+                description: "Could not connect to the server. Please check your internet.",
+                variant: "destructive"
+            });
+        }
     };
 
     return (
@@ -64,16 +166,75 @@ export function ContactPopup() {
 
                                     <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
                                         <div>
-                                            <Input placeholder="Your Name" required className="bg-secondary/30 border-border/50 text-foreground" />
+                                            <Input 
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                placeholder="Your Name" 
+                                                required 
+                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                            />
                                         </div>
                                         <div>
-                                            <Input placeholder="Phone Number" type="tel" required className="bg-secondary/30 border-border/50 text-foreground" />
+                                            <Input 
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                placeholder="Phone Number" 
+                                                type="tel" 
+                                                required 
+                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                            />
                                         </div>
                                         <div>
-                                            <Input placeholder="Requirement" required className="bg-secondary/30 border-border/50 text-foreground" />
+                                            <Input 
+                                                name="email"
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                placeholder="Email Address" 
+                                                required 
+                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                            />
                                         </div>
                                         <div>
-                                            <Textarea placeholder="Tell us more (Optional)" className="bg-secondary/30 border-border/50 resize-none h-20 text-foreground" />
+                                            <Select 
+                                                onValueChange={(val) => handleSelectChange('propertyType', val)} 
+                                                value={formData.propertyType}
+                                            >
+                                                <SelectTrigger className="bg-secondary/30 border-border/50 text-foreground h-12">
+                                                    <SelectValue placeholder="Type of Property ?" />
+                                                </SelectTrigger>
+                                                <SelectContent className="z-[120]">
+                                                    <SelectItem value="residential">Residential</SelectItem>
+                                                    <SelectItem value="commercial">Commercial</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div>
+                                            <Select 
+                                                onValueChange={(val) => handleSelectChange('budget', val)} 
+                                                value={formData.budget}
+                                            >
+                                                <SelectTrigger className="bg-secondary/30 border-border/50 text-foreground h-12">
+                                                    <SelectValue placeholder="Budget ?" />
+                                                </SelectTrigger>
+                                                <SelectContent className="z-[120]">
+                                                    <SelectItem value="15-20L">15 -20 L</SelectItem>
+                                                    <SelectItem value="20-25L">20 -25 L</SelectItem>
+                                                    <SelectItem value="25-30L">25 -30 L</SelectItem>
+                                                    <SelectItem value="Above 30L">Above 30 L</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div>
+                                            <Textarea 
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleChange}
+                                                placeholder="Tell us more (Optional)" 
+                                                className="bg-secondary/30 border-border/50 resize-none h-20 text-foreground" 
+                                            />
                                         </div>
                                         <Button type="submit" variant="gold" size="lg" className="w-full font-bold tracking-wider py-6">
                                             REQUEST CALL BACK

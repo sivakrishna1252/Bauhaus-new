@@ -38,7 +38,7 @@ const steps = [
   {
     number: '04',
     title: 'Execution',
-    subtitle: '50% Payment During Execution, 40% on Completion  ',
+    subtitle: 'Execution and installation',
     description:
       'We select vendors and craftsmen based on expertise, quality, and certifications. Our project manager and designers supervise every stage, ensuring that work is executed smoothly, professionally, and to luxury standard',
     details:

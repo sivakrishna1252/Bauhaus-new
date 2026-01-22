@@ -25,6 +25,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
+    email: '',
     configuration: '',
     budget: '',
     message: '',
@@ -55,6 +56,11 @@ const Contact = () => {
     } else if (!/^\d{10}$/.test(formData.mobile.replace(/\D/g, ''))) {
       newErrors.mobile = "Please enter a valid 10-digit mobile number";
     }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
     if (!formData.message.trim()) newErrors.message = "Message is required";
 
     setErrors(newErrors);
@@ -73,6 +79,7 @@ const Contact = () => {
           body: JSON.stringify({
             name: formData.name,
             phone: formData.mobile,
+            email: formData.email,
             configuration: formData.configuration,
             budget: formData.budget,
             message: formData.message,
@@ -82,7 +89,7 @@ const Contact = () => {
         if (response.ok) {
           // Success
           setShowSuccessPopup(true);
-          setFormData({ name: '', mobile: '', configuration: '', budget: '', message: '' });
+          setFormData({ name: '', mobile: '', email: '', configuration: '', budget: '', message: '' });
 
           // Auto-hide popup after 3 seconds
           setTimeout(() => {
@@ -207,13 +214,15 @@ const Contact = () => {
             title: 'Make a Call',
             desc: 'For general enquiries',
             value: '+91 7507353999',
-            href: 'tel:+917507353999'
+            href: 'tel:+917507353999',
+            value2: '+91 8999773778',
+            href2: 'tel:+918999773778'
           }, {
             icon: <Mail className="w-8 h-8" />,
             title: 'Send a Mail',
             desc: 'For general enquiries',
             value: 'info@bauhauspaces.com',
-            href: 'https://mail.google.com/mail/?view=cm&fs=1&to=sivatools1252@gmail.com'
+            href: 'https://mail.google.com/mail/?view=cm&fs=1&to=infobauhauspace@gmail.com'
           }, {
             icon: <Headset className="w-8 h-8" />,
             title: 'Support',
@@ -233,11 +242,21 @@ const Contact = () => {
               <h3 className="font-serif text-xl mb-2">{item.title}</h3>
               <p className="text-muted-foreground text-sm mb-3">{item.desc}</p>
               {item.href ? (
-                <a href={item.href} className="font-medium hover:text-gold transition-colors block">
-                  {item.value}
-                </a>
+                <div className="space-y-2">
+                  <a href={item.href} className="font-medium hover:text-gold transition-colors block">
+                    {item.value}
+                  </a>
+                  {item.value2 && item.href2 && (
+                    <a href={item.href2} className="font-medium hover:text-gold transition-colors block">
+                      {item.value2}
+                    </a>
+                  )}
+                </div>
               ) : (
-                <p className="font-medium">{item.value}</p>
+                <div className="space-y-2">
+                  <p className="font-medium">{item.value}</p>
+                  {item.value2 && <p className="font-medium">{item.value2}</p>}
+                </div>
               )}
             </motion.div>
           ))}
@@ -305,6 +324,18 @@ const Contact = () => {
                 {errors.mobile && <p className="text-red-500 text-xs mt-1 ml-1">{errors.mobile}</p>}
               </div>
 
+              <div className="md:col-span-2 text-left">
+                <Input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address *"
+                  className={errors.email ? "border-red-500" : ""}
+                />
+                {errors.email && <p className="text-red-500 text-xs mt-1 ml-1">{errors.email}</p>}
+              </div>
+
               <Select onValueChange={(val) => handleSelectChange('configuration', val)} value={formData.configuration}>
                 <SelectTrigger className="h-12">
                   <SelectValue placeholder="Configuration of Property ?" />
@@ -323,11 +354,11 @@ const Contact = () => {
                   <SelectValue placeholder="Budget ?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="10-12L">10 -12 L</SelectItem>
-                  <SelectItem value="12-15L">12 -15 L</SelectItem>
+                 
                   <SelectItem value="15-20L">15 -20 L</SelectItem>
                   <SelectItem value="20-25L">20 -25 L</SelectItem>
                   <SelectItem value="25-30L">25 -30 L</SelectItem>
+                  <SelectItem value="Above 30L">Above 30 L</SelectItem>
                 </SelectContent>
               </Select>
 

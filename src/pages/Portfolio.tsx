@@ -67,10 +67,11 @@ const Portfolio = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
             {projects.map((project, index) => (
-              <div
+              <Link
                 key={project.id}
+                to={`/project/${project.id}`}
                 className={cn(
-                  "group card-hover transition-all duration-700",
+                  "group card-hover transition-all duration-700 block h-full",
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
                 )}
                 style={{ transitionDelay: `${index * 100}ms` }}
@@ -94,7 +95,7 @@ const Portfolio = () => {
                     <p className="text-neutral-600 leading-relaxed text-base lg:text-lg text-justify">{project.description}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import heroImage from '@/assets/Blogs.jpg';
-import placeholderImage from '@/assets/project-1.jpg';
+import placeholderImage from '@/assets/banner1.jpg';
+import placeholderImage2 from '@/assets/banner2.jpg';
+import placeholderImage3 from '@/assets/banner3.jpg';
 import { fetchBlogs } from '@/lib/api';
 
 export interface BlogPost {
@@ -59,7 +61,7 @@ export const MOCK_BLOGS: BlogPost[] = [
             <p>With a wide range of colors, textures, and finishes available, a modular kitchen can elevate the entire look of your home, making it a stylish space for culinary creativity.</p>
         `,
         created_at: '2024-02-10T00:00:00Z',
-        featured_image: placeholderImage,
+        featured_image: placeholderImage2,
         author: 'Admin',
         isMock: true
     },
@@ -80,7 +82,7 @@ export const MOCK_BLOGS: BlogPost[] = [
             <p>Minimalism is your best friend. Keep decor simple and functional. sleek lines and organized spaces create a sense of calm and openness.</p>
         `,
         created_at: '2024-03-05T00:00:00Z',
-        featured_image: placeholderImage,
+        featured_image: placeholderImage3,
         author: 'Admin',
         isMock: true
     }

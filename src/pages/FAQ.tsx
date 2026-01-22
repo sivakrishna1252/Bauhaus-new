@@ -112,7 +112,9 @@ export default function FAQ() {
                     bg-charcoal
                     text-white
                     text-left
+                    text-lg
                     font-medium
+                    tracking-wide
                   "
                                 >
                                     {faq.question}
@@ -137,8 +139,8 @@ export default function FAQ() {
                     overflow-hidden
                     bg-[#f4efe9]
                     rounded-b-lg
-                    text-gray-700
-                    text-sm
+                    text-gray-800
+                    text-base
                   "
                                 >
                                     <div className="px-6 py-4 leading-relaxed">

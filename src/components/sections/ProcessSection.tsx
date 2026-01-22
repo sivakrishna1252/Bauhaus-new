@@ -55,16 +55,14 @@ export function ProcessSection() {
           <div
             className={cn(
               'img-scale-reveal transition-all duration-1000 rounded-2xl overflow-hidden max-w-xl mx-auto',
+              isVisible ? 'is-visible' : ''
             )}
           >
-            <div className="h-full w-full overflow-hidden">
-              <img
-                src={consultationImage}
-                alt="Interior design consultation"
-                className="w-full h-auto"
-              />
-            </div>
-            {/* square decorative box REMOVED */}
+            <img
+              src={consultationImage}
+              alt="Interior design consultation"
+              className="w-full h-auto"
+            />
           </div>
 
           {/* Content (AS-IS) */}

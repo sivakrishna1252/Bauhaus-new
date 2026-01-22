@@ -12,9 +12,9 @@ const slides = [
   {
     image: heroImage1,
     subtitle: "Luxury Interior Design Studio in Pune",
-    title: "Designing modern, functional, and timeless spaces tailored to your lifestyle.",
+    title: "Transform Your Space Into Your Dream",
     highlight: "",
-    description: "Designing modern, functional, and timeless spaces tailored to your lifestyle.",
+    description: "We design modern, functional, and timeless interiors that perfectly reflect your lifestyle and elevate your everyday living experience.",
     ctaPrimary: { text: "Book a Consultation", link: "/contact" },
     ctaSecondary: { text: "View Our Work", link: "/portfolio" }
   },
@@ -30,9 +30,9 @@ const slides = [
   {
     image: heroImage3,
     subtitle: "Sanctuaries of Comfort and Elegance",
-    title: "Minimalistic Bedroom Design",
+    title: "Where Elegance Meets Functionality",
     highlight: "",
-    description: "Every interior we design is tailored to the client’s lifestyle, ensuring a seamless balance between comfort, usability, and visual harmony. ",
+    description: "Every interior we design is tailored to the client's lifestyle, ensuring a seamless balance between comfort, usability, and visual harmony.",
     ctaPrimary: { text: "Book a Consultation", link: "/contact" },
     ctaSecondary: { text: "View Portfolio", link: "/portfolio" }
   }
@@ -65,13 +65,13 @@ export function HeroSection() {
             alt="Luxury Interior"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/40" />
         </motion.div>
       </AnimatePresence>
 
       {/* Content */}
       <div className="container-custom relative z-10">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
@@ -105,7 +105,7 @@ export function HeroSection() {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="w-24 h-px bg-gold origin-left mb-8"
+                className="w-24 h-px bg-gold mx-auto mb-8"
               />
 
               {/* Description */}
@@ -113,7 +113,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="text-white/80 text-lg md:text-xl leading-relaxed mb-12 max-w-xl"
+                className="text-white/80 text-lg md:text-xl leading-relaxed mb-12 max-w-xl mx-auto"
               >
                 {slides[currentImageIndex].description}
               </motion.p>
@@ -123,7 +123,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col sm:flex-row gap-4"
+                className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <Button variant="default" size="xl" asChild >
                   <Link to={slides[currentImageIndex].ctaPrimary.link} >{slides[currentImageIndex].ctaPrimary.text}</Link>

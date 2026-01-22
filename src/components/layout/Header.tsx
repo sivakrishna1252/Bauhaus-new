@@ -16,15 +16,8 @@ interface NavLink {
 
 const leftLinks: NavLink[] = [
   { href: '/', label: 'Home' },
+  { href: '/portfolio', label: 'Our Projects' },
   { href: '/about', label: 'About Us' },
-  {
-    href: '/portfolio',
-    label: 'Our Projects',
-    subLinks: [
-      { href: '/projects/residential', label: 'Residential' },
-      { href: '/projects/commercial', label: 'Commercial' },
-    ]
-  },
   // { href: '/modular-kitchens', label: 'Offerings' },
   { href: '/how-it-works', label: 'How it works' },
 ];
