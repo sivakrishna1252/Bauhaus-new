@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import consultationImage from '@/assets/Consulation.png';
-import heroImage from '@/assets/how it works.jpg';
+import heroImage from '@/assets/website/Prashant guleria.webp';
 
 const steps = [
   {

@@ -1,6 +1,6 @@
 import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/faq.jpg';
+import heroImage from '@/assets/website/Faheem.webp';
 import { useState } from 'react';
 
 const faqs = [
@@ -60,20 +60,43 @@ export default function FAQ() {
 
     return (
         <Layout>
-            {/* HERO SECTION (UNCHANGED) */}
+            {/* HERO SECTION */}
             <section className="relative hero-padding bg-charcoal overflow-hidden">
-                <img
-                    src={heroImage}
-                    alt="FAQ"
-                    className="absolute inset-0 w-full h-full object-cover opacity-30"
-                />
+                <motion.div
+                    className="absolute inset-0"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                    <img
+                        src={heroImage}
+                        alt="FAQ"
+                        className="w-full h-full object-cover opacity-30"
+                    />
+                </motion.div>
                 <div className="container-custom relative z-10">
-                    <p className="text-gold text-sm tracking-[0.4em] uppercase mb-4">
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-gold text-sm tracking-[0.4em] uppercase mb-6"
+                    >
                         Frequently Asked Questions
-                    </p>
-                    <h1 className="font-serif text-5xl md:text-6xl text-background">
+                    </motion.p>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 40, filter: 'blur(4px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="font-serif text-5xl md:text-6xl lg:text-7xl text-background mb-8"
+                    >
                         FAQ
-                    </h1>
+                    </motion.h1>
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="w-16 h-px bg-gold origin-left"
+                    />
                 </div>
             </section>
 

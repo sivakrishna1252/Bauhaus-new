@@ -66,6 +66,9 @@ export function Header() {
     location.pathname.startsWith('/projects/') ||
     location.pathname.startsWith('/blog/');
 
+  // Check if we're on contact page
+  const isContactPage = location.pathname === '/contact';
+
   const isActive = (link: NavLink) => {
     if (location.pathname === link.href) return true;
     if (link.subLinks) {
@@ -79,11 +82,17 @@ export function Header() {
       className={
         cn(
           'fixed top-0 left-0 right-0 z-[100] transition-[background-color,backdrop-filter,height,box-shadow] duration-500 ease-in-out',
-          isScrolled
-            ? 'bg-neutral-900/95 backdrop-blur-md shadow-lg h-20 md:h-20'
-            : hasDarkHero
-              ? 'bg-transparent h-20 md:h-24'
-              : 'bg-neutral-900/90 h-20 md:h-20'
+          // On contact page: transparent at top (like other pages), bg when scrolled
+          isContactPage && !isScrolled
+            ? 'bg-transparent h-20 md:h-24'
+            : isContactPage && isScrolled
+              ? 'bg-neutral-900/95 backdrop-blur-md shadow-lg h-20 md:h-20'
+              : // All other pages (including careers): old behavior
+              isScrolled
+                ? 'bg-neutral-900/95 backdrop-blur-md shadow-lg h-20 md:h-20'
+                : hasDarkHero
+                  ? 'bg-transparent h-20 md:h-24'
+                  : 'bg-neutral-900/90 h-20 md:h-20'
         )
       }
     >

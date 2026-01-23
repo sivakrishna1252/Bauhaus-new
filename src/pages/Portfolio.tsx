@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { projects } from '@/data/projects';
-import taikenHero from '@/assets/Taiken 08.jpg';
+import taikenHero from '@/assets/website/Taiken .webp';
+import { ContactPopup } from '@/components/ui/ContactPopup';
 
 const Portfolio = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -113,6 +114,7 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
+      <ContactPopup />
     </Layout>
   );
 };

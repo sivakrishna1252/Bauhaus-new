@@ -10,7 +10,7 @@ import {
     CarouselPrevious,
     type CarouselApi,
 } from "@/components/ui/carousel";
-import heroImage from '@/assets/about.jpg';
+import heroImage from '@/assets/website/Rajesh Mohapatra.webp';
 import project1 from '@/assets/project-1.jpg'; // Placeholder for team/collage
 
 const fadeInUp = {

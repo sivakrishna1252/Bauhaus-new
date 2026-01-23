@@ -7,6 +7,7 @@ import { ArrowLeft, MapPin, User, Tag, Maximize2 } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { ContactPopup } from '@/components/ui/ContactPopup';
 
 const ProjectDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -280,6 +281,7 @@ const ProjectDetail = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+            <ContactPopup />
         </Layout>
     );
 };

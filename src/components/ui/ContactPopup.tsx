@@ -25,20 +25,21 @@ export function ContactPopup() {
         budget: '',
         message: '',
     });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const { toast } = useToast();
     const location = useLocation();
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const popupCountRef = useRef(0);
-    const isPortfolioPage = location.pathname === '/portfolio';
+    const isProjectPage = location.pathname === '/portfolio' || location.pathname.startsWith('/project/');
 
     useEffect(() => {
-        // Reset popup count when navigating to Portfolio page
-        if (isPortfolioPage) {
+        // Reset popup count when navigating to project pages
+        if (isProjectPage) {
             popupCountRef.current = 0;
         }
 
-        if (isPortfolioPage) {
-            // Portfolio page: Show popup every 30 seconds, maximum 3 times
+        if (isProjectPage) {
+            // Project pages: Show popup every 30 seconds, maximum 3 times
             const showPopup = () => {
                 if (popupCountRef.current < 3) {
                     setIsOpen(true);
@@ -55,11 +56,11 @@ export function ContactPopup() {
             // First popup after 30 seconds
             const firstTimer = setTimeout(() => {
                 showPopup();
-            }, 30000);
-
-            // Subsequent popups every 30 seconds
-            intervalRef.current = setInterval(() => {
-                showPopup();
+                
+                // Start interval for subsequent popups (every 30 seconds)
+                intervalRef.current = setInterval(() => {
+                    showPopup();
+                }, 30000);
             }, 30000);
 
             return () => {
@@ -79,21 +80,84 @@ export function ContactPopup() {
 
             return () => clearTimeout(timer);
         }
-    }, [isPortfolioPage, hasOpened]);
+    }, [isProjectPage, hasOpened]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+        
+        // Phone: Only allow digits, max 10
+        if (name === 'phone') {
+            const digitsOnly = value.replace(/\D/g, '');
+            if (digitsOnly.length <= 10) {
+                setFormData({
+                    ...formData,
+                    [name]: digitsOnly,
+                });
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
+        
+        // Clear error when user types
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: '' });
+        }
     };
 
     const handleSelectChange = (name: string, value: string) => {
         setFormData({ ...formData, [name]: value });
+        // Clear error when user selects
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: '' });
+        }
+    };
+
+    const validate = () => {
+        let newErrors: { [key: string]: string } = {};
+        
+        if (!formData.name.trim()) {
+            newErrors.name = "Name is required";
+        }
+        
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
+            newErrors.phone = "Please enter a valid 10-digit phone number";
+        }
+        
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+        
+        if (!formData.propertyType) {
+            newErrors.propertyType = "Please select property type";
+        }
+        
+        if (!formData.budget) {
+            newErrors.budget = "Please select budget";
+        }
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!validate()) {
+            toast({
+                title: "Validation Error",
+                description: "Please check the highlighted fields.",
+                variant: "destructive"
+            });
+            return;
+        }
+        
         try {
             const response = await fetch('http://localhost:8000/api/contacts/', {
                 method: 'POST',
@@ -107,6 +171,7 @@ export function ContactPopup() {
                     configuration: formData.propertyType,
                     budget: formData.budget,
                     message: formData.message,
+                    source: 'popup',
                 }),
             });
 
@@ -172,19 +237,26 @@ export function ContactPopup() {
                                                 onChange={handleChange}
                                                 placeholder="Your Name" 
                                                 required 
-                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                                className={`bg-secondary/30 border-border/50 text-foreground ${errors.name ? 'border-red-500' : ''}`} 
                                             />
+                                            {errors.name && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <Input 
                                                 name="phone"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                placeholder="Phone Number" 
+                                                placeholder="Phone Number (10 digits)" 
                                                 type="tel" 
                                                 required 
-                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                                maxLength={10}
+                                                className={`bg-secondary/30 border-border/50 text-foreground ${errors.phone ? 'border-red-500' : ''}`} 
                                             />
+                                            {errors.phone && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <Input 
@@ -194,15 +266,18 @@ export function ContactPopup() {
                                                 onChange={handleChange}
                                                 placeholder="Email Address" 
                                                 required 
-                                                className="bg-secondary/30 border-border/50 text-foreground" 
+                                                className={`bg-secondary/30 border-border/50 text-foreground ${errors.email ? 'border-red-500' : ''}`} 
                                             />
+                                            {errors.email && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <Select 
                                                 onValueChange={(val) => handleSelectChange('propertyType', val)} 
                                                 value={formData.propertyType}
                                             >
-                                                <SelectTrigger className="bg-secondary/30 border-border/50 text-foreground h-12">
+                                                <SelectTrigger className={`bg-secondary/30 border-border/50 text-foreground h-12 ${errors.propertyType ? 'border-red-500' : ''}`}>
                                                     <SelectValue placeholder="Type of Property ?" />
                                                 </SelectTrigger>
                                                 <SelectContent className="z-[120]">
@@ -210,13 +285,16 @@ export function ContactPopup() {
                                                     <SelectItem value="commercial">Commercial</SelectItem>
                                                 </SelectContent>
                                             </Select>
+                                            {errors.propertyType && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.propertyType}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <Select 
                                                 onValueChange={(val) => handleSelectChange('budget', val)} 
                                                 value={formData.budget}
                                             >
-                                                <SelectTrigger className="bg-secondary/30 border-border/50 text-foreground h-12">
+                                                <SelectTrigger className={`bg-secondary/30 border-border/50 text-foreground h-12 ${errors.budget ? 'border-red-500' : ''}`}>
                                                     <SelectValue placeholder="Budget ?" />
                                                 </SelectTrigger>
                                                 <SelectContent className="z-[120]">
@@ -226,6 +304,9 @@ export function ContactPopup() {
                                                     <SelectItem value="Above 30L">Above 30 L</SelectItem>
                                                 </SelectContent>
                                             </Select>
+                                            {errors.budget && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.budget}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <Textarea 
